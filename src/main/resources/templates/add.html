@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+
+    body {
+      background: linear-gradient(100deg, #d4f1ff, #ffffff);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .h1 {
+      text-align: center;
+    }
+
+    .form-box {
+      width: 90%;
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 25px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .input-label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .input-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 5px;
+    }
+
+    .button {
+      background-color: #28a745;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      width: 100%;
+      font-weight: bold;
+    }
+
+    .button:hover {
+      background-color: #218838;
+    }
+
+    .a {
+      padding: 10px;
+      margin-right: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+
+</head>
+<body>
+
+  <div class="title">
+    <h1 class="h1">Add New Task</h1>
+  </div>
+
+  <form action="#" th:action="@{/add}" th:object="${task}" method="post" class="form-box">
+
+    <label class="input-label">
+      Title:
+      <input type="text" th:field="*{title}" required class="input-field">
+    </label>
+
+    <label class="input-label">
+      Description:
+      <input type="text" th:field="*{description}" required class="input-field">
+    </label>
+    
+    <button type="submit" class="button">Add Task</button>
+
+    <a href="/" class="a">👈 Back to List</a>
+
+  </form>
+
+</body>
+</html>

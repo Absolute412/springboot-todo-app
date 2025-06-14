@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            background: linear-gradient(100deg, #d4f1ff, #ffffff);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+        }
+
+        .task-section {
+            margin-top: 30px;
+        }
+
+        .task-section h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .task-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .task.completed {
+            background-color: #e9f5e9;
+        }
+
+        .task-info {
+            flex: 1;
+        }
+
+        .task .completed {
+            color: #2e7d32;
+            font-weight: bold;
+            text-decoration: line-through;
+        }
+
+        .task-actions a {
+            margin-left: 10px;
+            text-decoration: none;
+            color: white;
+            background: #007bff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .task-actions a.delete {
+            background: #dc3545;
+        }
+
+        a.add-btn {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            background: green;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <a href="/add" class="add-btn">+ Add New Task</a>
+
+    <!-- Pending Tasks -->
+    <div class="task-section">
+        <h2>Pending Tasks</h2>
+        <div class="task-list">
+            <div class="task" th:each="task : ${pendingTasks}">
+                <div class="task-info">
+                    <div th:text="${task.title}"></div>
+                    <small th:text="${task.description}"></small>
+                </div>
+                <div class="task-actions">
+                    <a th:href="@{/edit/{id}(id=${task.id})}">Edit</a>
+                    <a th:href="@{/delete/{id}(id=${task.id})}" class="delete">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div class="task-section">
+        <h2>Completed Tasks</h2>
+        <div class="task-list">
+            <div class="task completed" th:each="task : ${completedTasks}">
+                <div class="task-info">
+                    <div th:text="${task.title}" class="completed"></div>
+                    <small th:text="${task.description}"></small>
+                </div>
+                <div class="task-actions">
+                    <a th:href="@{/edit/{id}(id=${task.id})}">Edit</a>
+                    <a th:href="@{/delete/{id}(id=${task.id})}" class="delete">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
