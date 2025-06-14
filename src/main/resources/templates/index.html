@@ -91,6 +91,9 @@
     <div class="task-section">
         <h2>Pending Tasks</h2>
         <div class="task-list">
+            <div th:if="${#lists.isEmpty(pendingTasks)}">
+                <p style="color: #666;">No pending tasks yet. Add one above 👆</p>
+            </div>
             <div class="task" th:each="task : ${pendingTasks}">
                 <div class="task-info">
                     <div th:text="${task.title}"></div>
@@ -104,21 +107,25 @@
         </div>
     </div>
 
-    <!-- Completed Tasks -->
-    <div class="task-section">
-        <h2>Completed Tasks</h2>
-        <div class="task-list">
-            <div class="task completed" th:each="task : ${completedTasks}">
-                <div class="task-info">
-                    <div th:text="${task.title}" class="completed"></div>
-                    <small th:text="${task.description}"></small>
-                </div>
-                <div class="task-actions">
-                    <a th:href="@{/edit/{id}(id=${task.id})}">Edit</a>
-                    <a th:href="@{/delete/{id}(id=${task.id})}" class="delete">Delete</a>
-                </div>
+<!-- Completed Tasks -->
+<div class="task-section">
+    <h2>Completed Tasks</h2>
+    <div class="task-list">
+        <div th:if="${#lists.isEmpty(completedTasks)}">
+            <p style="color: #666;">No completed tasks yet. Finish one to see it here ✅</p>
+        </div>
+        <div class="task completed" th:each="task : ${completedTasks}">
+            <div class="task-info">
+                <div th:text="${task.title}" class="completed"></div>
+                <small th:text="${task.description}"></small>
+            </div>
+            <div class="task-actions">
+                <a th:href="@{/edit/{id}(id=${task.id})}">Edit</a>
+                <a th:href="@{/delete/{id}(id=${task.id})}" class="delete">Delete</a>
             </div>
         </div>
     </div>
+</div>
+
 </body>
 </html>
